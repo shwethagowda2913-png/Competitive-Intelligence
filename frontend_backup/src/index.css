@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 244 246 250; --surface: 255 255 255; --raised: 241 244 249; --line: 221 227 238;
+  --ink: 15 26 43; --muted: 98 112 135;
+  --brand: 37 99 235; --memory: 109 74 224; --good: 16 150 104; --bad: 213 68 58; --warn: 183 117 8;
+}
+.dark {
+  --bg: 12 18 30; --surface: 19 28 45; --raised: 27 39 61; --line: 41 55 82;
+  --ink: 230 236 245; --muted: 140 155 181;
+  --brand: 96 165 250; --memory: 167 139 250; --good: 82 201 160; --bad: 242 125 115; --warn: 240 184 75;
+}
+html, body, #root { height: 100%; }
+body { @apply bg-bg text-ink font-sans antialiased; font-feature-settings: "tnum"; }
+*:focus-visible { outline: 2px solid rgb(var(--brand)); outline-offset: 2px; border-radius: 6px; }
+::selection { background: rgb(var(--memory) / .35); }
+.card { @apply bg-surface border border-line rounded-xl shadow-card; }
+.input { @apply w-full rounded-lg border border-line bg-raised px-3 py-2 text-sm text-ink placeholder:text-muted/70 focus:border-brand; }
+.label { @apply mb-1 block text-xs font-semibold text-muted; }
+.th { @apply px-4 py-2.5 text-left text-xs font-semibold text-muted; }
+.td { @apply px-4 py-3 text-sm align-top; }
+.rail { border-left: 3px solid rgb(var(--memory) / .7); }
+@keyframes shimmer { 0% { background-position: -400px 0; } 100% { background-position: 400px 0; } }
+.skeleton { background: linear-gradient(90deg, rgb(var(--raised)) 25%, rgb(var(--line) / .6) 50%, rgb(var(--raised)) 75%); background-size: 800px 100%; animation: shimmer 1.4s infinite linear; border-radius: 8px; }
+@keyframes pop { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.pop { animation: pop .18s ease-out; }
+@media (prefers-reduced-motion: reduce) { .skeleton, .pop { animation: none; } }
